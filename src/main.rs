@@ -3,15 +3,11 @@ use rand::prelude::*;
 
 struct Dodosuko(ThreadRng);
 
-impl Dodosuko {
-    const DATA: [&'static str; 2] = ["ドド", "スコ"];
-}
-
 impl Iterator for Dodosuko {
     type Item = &'static str;
 
     fn next(&mut self) -> Option<Self::Item> {
-        Self::DATA.choose(&mut self.0).copied()
+        ["ドド", "スコ"].choose(&mut self.0).copied()
     }
 }
 
