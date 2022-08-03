@@ -11,16 +11,14 @@ impl Iterator for Dodosuko {
     type Item = &'static str;
 
     fn next(&mut self) -> Option<Self::Item> {
-        Self::DATA.choose(&mut self.0).map(|x| {
-            print!("{}", x);
-            *x
-        })
+        Self::DATA.choose(&mut self.0).copied()
     }
 }
 
 fn main() {
     Dodosuko(rand::thread_rng())
         .into_iter()
+        .inspect(|x| print!("{}", x))
         .tuple_windows()
         .take_while(|item| {
             !matches!(
